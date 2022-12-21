@@ -1,0 +1,27 @@
+<task> ::= <name> "takes" <duration> "needs" <dependencies>
+
+<name> ::= <letter> <identifier>
+<duration> ::= <integer>
+<dependencies> ::= <name> | <name> <dependency_operator> <dependencies> |"none"
+
+<dependency_operator> ::= "and" | "or"
+<letter> ::= "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" | "n" |
+ "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z" | "A" | "B" | "C" | "D" |
+  "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T" |
+   "U" | "V" | "W" | "X" | "Y" | "Z"
+<identifier> ::= <letter> | <letter> <identifier> | <digit> | <digit> <identifier>
+<digit> ::= "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
+
+##############################################################################################
+
+
+<scheduling_problem> ::= <task_description> | <task_description> <scheduling_problem>
+<task_description> ::= <task_name> "takes" <duration> "needs" <dependencies>
+<task_name> ::= <alpha> <alphanumeric>*
+<duration> ::= <non_zero_digit> <digit>*
+<dependencies> ::= "none" | <dependency> | "(" <dependency> ")"
+<dependency> ::= <task_name> | <task_name> "and" <dependency> | <task_name> "or" <dependency>
+<alpha> ::= "A" | "B" | ... | "Z" | "a" | "b" | ... | "z"
+<alphanumeric> ::= <alpha> | <digit>
+<non_zero_digit> ::= "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
+<digit> ::= "0" | <non_zero_digit>
