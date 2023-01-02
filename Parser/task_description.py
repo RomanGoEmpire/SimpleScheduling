@@ -175,13 +175,6 @@ class TaskDescription:
         return first_type_count, second_type_count
 
 
-def print_tree(node):
-    if node is None:
-        return
-    print(node.data)
-    print_tree(node.left)
-    print_tree(node.right)
-
 
 
 
