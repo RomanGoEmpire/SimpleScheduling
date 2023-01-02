@@ -5,35 +5,38 @@ class WordParser:
 
     def next_word(self):
         word = ""
+
+        # If the buffer attribute is set, return a right parenthesis
         if self.buffer:
             self.buffer = False
-            word = ")"
-        else:
-            while True:
-                c = self.file.read(1)
-                if len(c) == 0:
-                    if word == "":
-                        return None
-                    else:
-                        return word
+            return ")"
+
+        # Read characters from the file until a word is formed
+        while True:
+            # Read a single character from the file
+            c = self.file.read(1)
+
+            # Return the word or None if the end of the file has been reached
+            if not c:
+                return word or None
+
+            # Skip spaces, newlines, and tabs unless a word has already been formed
+            if c in " \n\t":
+                if word:
                     break
-                if c == '(':
-                    word += c
-                    break
-                elif c == ')':
-                    if word == "":
-                        return ")"
-                    else:
-                        self.buffer = True
-                        break
-                if c == ' ' or c == '\n' or c == '\t':
-                    if word == "":
-                        continue
-                    else:
-                        break
-                else:
-                    word += c
-        if word:
-            return word
-        else:
-            return None
+            # Add left parentheses to the word and break the loop
+            elif c == "(":
+                word += c
+                break
+            # Return right parentheses immediately or add them to the word if a word has already been formed
+            elif c == ")":
+                if not word:
+                    return ")"
+                self.buffer = True
+                break
+            # Add any other character to the word
+            else:
+                word += c
+
+        return word
+

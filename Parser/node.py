@@ -33,4 +33,4 @@ class OperatorNode(Node):
         return self.right
 
     def __str__(self):
-        return f"({self.left} {self.operator} {self.right})"
+        return f"{self.operator}({self.left},{self.right})"
