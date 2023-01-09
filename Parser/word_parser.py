@@ -24,11 +24,11 @@ class WordParser:
             if c in " \n\t":
                 if word:
                     break
-            # Add left parentheses to the word and break the loop
+            # Add left parentheses to the word and break the loop to return the parentheses
             elif c == "(":
                 word += c
                 break
-            # Return right parentheses immediately or add them to the word if a word has already been formed
+            # Return right parentheses immediately or add them to the word if no word has already been formed
             elif c == ")":
                 if not word:
                     return ")"

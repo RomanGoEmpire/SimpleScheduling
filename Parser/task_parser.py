@@ -20,9 +20,6 @@ class TaskParser:
         except Exception as e:
             print("Parsing failed, because of:\n " + str(e))
 
-
-
-
     def get_task(self):
         token = self.tokenizer.next_token()
         if token is None:
@@ -174,8 +171,3 @@ class TaskParser:
             if dependency.is_type(second_type):
                 second_type_count += 1
         return first_type_count, second_type_count
-
-
-
-
-
