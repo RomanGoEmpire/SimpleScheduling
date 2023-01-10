@@ -10,7 +10,6 @@ class TaskNode(Node):
     def __str__(self):
         return self.name
 
-
 class OperatorNode(Node):
     def __init__(self, operator, left, right):
         self.operator = operator

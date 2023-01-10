@@ -1,8 +1,14 @@
 Task1
 takes 1
-needs Task2
+needs none
 Task2
-takes 1
-needs Task1
+takes 2
+needs ((Task1 and Task3) or Task4)
+Task3
+takes 3
+needs Task2
+Task4
+takes 2
+needs (Task2 or Task1)
 
 

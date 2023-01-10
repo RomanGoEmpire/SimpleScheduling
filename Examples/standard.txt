@@ -1,0 +1,15 @@
+Task1
+takes 2
+needs Task2 and Task3 or Task4 and Task5
+Task2
+takes 1
+needs none
+Task3
+takes 3
+needs Task2
+Task4
+takes 3
+needs none
+Task5
+takes 3
+needs none

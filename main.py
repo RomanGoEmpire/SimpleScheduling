@@ -9,8 +9,17 @@ def schedule(path):
 
 
 if __name__ == "__main__":
-    schedule("Examples/scheduling_problem.txt")
-    #simple example
+    # change the content of this file
+    #schedule("Examples/scheduling_problem.txt")
+
+    # simplest example
+    #schedule("Examples/simplest.txt")
+
+    # vicious example
+    #schedule("Examples/vicious.txt")
+
+    # standard example
+    schedule("Examples/standard.txt")
 
 
 
