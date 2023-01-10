@@ -1,7 +1,16 @@
 from Parser.task_parser import TaskParser
+from scheduling_z3 import solve
+
+def schedule(path):
+    task_parser = TaskParser(path)
+    task_list = task_parser.get_task_list()
+    answer = solve(task_list)
+    print(answer)
+
 
 if __name__ == "__main__":
-    t = TaskParser("Examples/scheduling_problem.txt")
-    list = t.get_task_list()
-    for task in list:
-        print(task)
+    schedule("Examples/scheduling_problem.txt")
+    #simple example
+
+
+
