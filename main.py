@@ -21,11 +21,19 @@ def schedule(path):
     >>> schedule("Examples/vicious")
     Unsolvable!
 
-    >>> schedule("Examples/parse_fail_name")
+    >>> schedule("Examples/wrong_name")
     Parsing failed, because of:
      Expected TokenType.TAKES
     Got TokenType.NUMBER
+    >>> schedule("Examples/invalid_symbols")
+    Parsing failed, because of:
+     Illegal Name: Task-1
+     >>> schedule("Examples/invalid_dependencies")
+     Parsing failed, because of:
+      Illegal Name: Task1,Task2,Task3
     """
+
+
 
     # initialize the Parser
     task_parser = TaskParser(path)
