@@ -2,6 +2,7 @@ from z3 import *
 
 from Parser.node import TaskNode
 
+
 def solve(tasks):
     # Create integer variables to represent the start, the end times of each task and how much it takes
     starts = {task.name: Int(f"{task.name}_start") for task in tasks}
@@ -18,28 +19,25 @@ def solve(tasks):
         solver.add(starts[task.name] >= 0)
         solver.add(ends[task.name] == starts[task.name] + task.duration)
 
-
     # dependencies
-    def c_dep(node,name):
+    def c_dep(node, name):
         if type(node) is TaskNode:
             if node.name == "none":
                 return
             return starts[name] >= ends[node.name]
         if node.operator == "And":
-            return And(c_dep(node.left,name),c_dep(node.right,name))
+            return And(c_dep(node.left, name), c_dep(node.right, name))
         if node.operator == "Or":
-            return Or(c_dep(node.left,name),c_dep(node.right,name))
-
+            return Or(c_dep(node.left, name), c_dep(node.right, name))
 
     for task in tasks:
-        dep = c_dep(task.dependencies,task.name)
+        dep = c_dep(task.dependencies, task.name)
         if dep is None:
             continue
         solver.add(dep)
 
     solver.minimize(sum(duration))
     triple = []
-    print(solver)
     if solver.check() == sat:
         model = solver.model()
         for task in tasks:
