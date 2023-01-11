@@ -4,6 +4,19 @@ class WordParser:
         self.buffer = False
 
     def next_word(self):
+        """
+        >>> w = WordParser("../Examples/simplest")
+        >>> w.next_word()
+        'Task'
+        >>> w.next_word()
+        'takes'
+        >>> w.next_word()
+        '1'
+        >>> w.next_word()
+        'needs'
+        >>> w.next_word()
+        'none'
+        """
         word = ""
 
         # If the buffer attribute is set, return a right parenthesis
@@ -39,3 +52,6 @@ class WordParser:
                 word += c
 
         return word
+
+# if __name__ == '__main__':
+#     doctest.testmod()
