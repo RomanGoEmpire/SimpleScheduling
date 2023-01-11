@@ -38,8 +38,9 @@ def solve(tasks):
         solver.add(dep)
 
     solver.minimize(sum(duration))
+
+
     triple = []
-    print(solver)
     if solver.check() == sat:
         model = solver.model()
         for task in tasks:
