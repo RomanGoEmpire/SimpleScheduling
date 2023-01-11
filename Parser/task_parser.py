@@ -1,6 +1,6 @@
-from Parser.node import TaskNode, OperatorNode
-from Parser.task_description import Task
-from Parser.token import TokenType, Token
+from Parser.Objects.node import TaskNode, OperatorNode
+from Parser.Objects.task_description import Task
+from Parser.Objects.token import TokenType, Token
 from Parser.tokenizer import Tokenizer
 
 
@@ -10,15 +10,12 @@ class TaskParser:
 
     def get_task_list(self):
         task_list = []
-        try:
-            while True:
-                task = self.get_task()
-                if task is None:
-                    break
-                task_list.append(task)
-            return task_list
-        except Exception as e:
-            print("Parsing failed, because of:\n " + str(e))
+        while True:
+            task = self.get_task()
+            if task is None:
+                break
+            task_list.append(task)
+        return task_list
 
     def get_task(self):
         token = self.tokenizer.next_token()
@@ -50,6 +47,9 @@ class TaskParser:
             if len(dependencies) == 1:
                 return TaskNode(dependencies[0].value)
             else:
+                for dependency in dependencies:
+                    if dependency.is_name() and dependency.value == "none":
+                        raise Exception("Invalid dependencies")
                 return self.evaluate_dependencies(dependencies)[0].value
 
     def get_dependencies_list(self):

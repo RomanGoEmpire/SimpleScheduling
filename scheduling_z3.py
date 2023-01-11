@@ -1,10 +1,10 @@
 from z3 import *
 
-from Parser.node import TaskNode
+from Parser.Objects.node import TaskNode
 
 
 def solve(tasks):
-    # Create integer variables to represent the start, the end times of each task and how much it takes
+    # Create integer variables to represent the start, the end times of each task and a list of the end times
     starts = {task.name: Int(f"{task.name}_start") for task in tasks}
     ends = {task.name: Int(f"{task.name}_end") for task in tasks}
     duration = [Int(f"{task.name}_end") for task in tasks]
@@ -40,11 +40,11 @@ def solve(tasks):
     # minimize the sum of the end times of all tasks
     solver.minimize(sum(duration))
 
-
     triple = []
     if solver.check() == sat:
         model = solver.model()
         for task in tasks:
             triple.append((task.name, model[Int(f'{task.name}_start')], model[Int(f'{task.name}_end')]))
         return triple
-    return "Unsolvable!"
+    else:
+        return None

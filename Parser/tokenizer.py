@@ -1,4 +1,4 @@
-from Parser.token import Token, TokenType
+from Parser.Objects.token import Token, TokenType
 from Parser.word_parser import WordParser
 
 
