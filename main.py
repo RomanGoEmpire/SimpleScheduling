@@ -27,7 +27,6 @@ def schedule(path):
     Got TokenType.NUMBER
     """
 
-
     # initialize the Parser
     task_parser = TaskParser(path)
     task_list = None
@@ -52,13 +51,13 @@ if __name__ == "__main__":
     doctest.testmod()
 
     # TODO: EDIT THIS FILE TO GET YOUR SCHEDULING
-    #schedule("Examples/scheduling_problem")
+    # schedule("Examples/scheduling_problem")
 
     # simplest example
-    #schedule("Examples/simplest")
+    # schedule("Examples/simplest")
 
     # vicious example
-    #schedule("Examples/vicious")
+    # schedule("Examples/vicious")
 
     # standard example
     schedule("Examples/standard")

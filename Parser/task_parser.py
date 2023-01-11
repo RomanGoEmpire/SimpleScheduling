@@ -57,10 +57,12 @@ class TaskParser:
             return self.tokenizer.peek_token() is None
 
         def is_end_of_dependencies():
-            return token.is_name() and self.tokenizer.peek_token().is_name() or token.is_close_bracket() and self.tokenizer.peek_token().is_name()
+            return token.is_name() and self.tokenizer.peek_token().is_name() or token.is_close_bracket() \
+                   and self.tokenizer.peek_token().is_name()
 
         def is_valid_token_for_dependencies():
-            return token.is_open_bracket() or token.is_close_bracket() or token.is_name() or token.is_and() or token.is_or()
+            return token.is_open_bracket() or token.is_close_bracket() or token.is_name() or token.is_and() \
+                   or token.is_or()
 
         dependency_list = []
         # get tokens until end of file or end of dependency

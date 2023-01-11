@@ -39,4 +39,3 @@ class WordParser:
                 word += c
 
         return word
-
