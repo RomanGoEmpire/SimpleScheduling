@@ -8,34 +8,36 @@ def solve(tasks):
     starts = {task.name: Int(f"{task.name}_start") for task in tasks}
     ends = {task.name: Int(f"{task.name}_end") for task in tasks}
     duration = [Int(f"{task.name}_end") for task in tasks]
+
     # Create a solver instance
     solver = Optimize()
 
     # Constraints:
-    # 1- Every task must be given a duration: the number of steps it needs to complete.
-    # 2- A duration is specified by the keyword takes followed by a natural number (which should be greater than zero).
-    # 3- If a task takes n steps and starts at step s, then it must finish at step s + n.
+    # 1- Start should be greater than zero
+    # 2- If a task takes n steps and starts at step s, then it must finish at step s + n.
     for task in tasks:
         solver.add(starts[task.name] >= 0)
         solver.add(ends[task.name] == starts[task.name] + task.duration)
 
-    # dependencies
-    def c_dep(node, name):
+    # recursive function to get the dependencies of a task
+    def convert_tree_to_z3_expression(node, name):
         if type(node) is TaskNode:
             if node.name == "none":
                 return
             return starts[name] >= ends[node.name]
         if node.operator == "And":
-            return And(c_dep(node.left, name), c_dep(node.right, name))
+            return And(convert_tree_to_z3_expression(node.left, name), convert_tree_to_z3_expression(node.right, name))
         if node.operator == "Or":
-            return Or(c_dep(node.left, name), c_dep(node.right, name))
+            return Or(convert_tree_to_z3_expression(node.left, name), convert_tree_to_z3_expression(node.right, name))
 
+    # 3 - If a task depends on another task it can not start before the other task ends
     for task in tasks:
-        dep = c_dep(task.dependencies, task.name)
+        dep = convert_tree_to_z3_expression(task.dependencies, task.name)
         if dep is None:
             continue
         solver.add(dep)
 
+    # minimize the sum of the end times of all tasks
     solver.minimize(sum(duration))
 
 
@@ -45,5 +47,4 @@ def solve(tasks):
         for task in tasks:
             triple.append((task.name, model[Int(f'{task.name}_start')], model[Int(f'{task.name}_end')]))
         return triple
-
     return "Unsolvable!"

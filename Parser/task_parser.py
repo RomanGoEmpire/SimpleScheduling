@@ -49,10 +49,6 @@ class TaskParser:
             dependencies = self.get_dependencies_list()
             if len(dependencies) == 1:
                 return TaskNode(dependencies[0].value)
-            elif len(dependencies) > 1:
-                for dep in dependencies:
-                    if dep.value is None:
-                        raise Exception("None with other Tasks")
             else:
                 return self.evaluate_dependencies(dependencies)[0].value
 
