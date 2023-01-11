@@ -51,7 +51,7 @@ if __name__ == "__main__":
     doctest.testmod()
 
     # TODO: EDIT THIS FILE TO GET YOUR SCHEDULING
-    # schedule("Examples/scheduling_problem")
+    schedule("Examples/scheduling_problem")
 
     # simplest example
     # schedule("Examples/simplest")
@@ -60,4 +60,4 @@ if __name__ == "__main__":
     # schedule("Examples/vicious")
 
     # standard example
-    schedule("Examples/standard")
+    # schedule("Examples/standard")
