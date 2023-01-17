@@ -3,6 +3,7 @@ class Node:
         pass
 
 
+# A TaskNode is a node which contains the name of the task.
 class TaskNode(Node):
     def __init__(self, name):
         self.name = name
@@ -11,6 +12,7 @@ class TaskNode(Node):
         return self.name
 
 
+# An OperatorNode contains the operation and a left and right child which can be other OperatorNodes or TaskNodes.
 class OperatorNode(Node):
     def __init__(self, operator, left, right):
         self.operator = operator
